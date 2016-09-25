@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--上面的xsd最好和当前使用的Spring版本号一致,如果换了Spring版本,这个最好也跟着改-->
+    <!-- 使用 annotation -->
+    <context:annotation-config />
+    <!-- 使用 annotation 自动注册bean,并检查@Controller, @Service, @Repository注解已被注入 -->
+    <context:component-scan base-package="com.zou.test" />
+    <!-- 引入属性文件 放在最开头,在使用spring之前就引入,里面的变量才能被引用-->
+    <context:property-placeholder location="classpath*:properties/*.properties"/>
+    <!--
+    引入属性文件也可以用这种写法
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:config.properties" />
+    </bean>
+    -->
+    <!-- C3P0 数据源 -->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+        <!--<property name="driverClass" value="com.mysql.jdbc.Driver"/>-->
+        <!--<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/test"/>-->
+        <!--<property name="properties">-->
+            <!--<props>-->
+                <!--<prop key="user">root</prop>-->
+                <!--<prop key="password">root</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+
+    <!--&lt;!&ndash; sessionFactory &ndash;&gt;-->
+    <!--<bean id="sessionFactory"-->
+          <!--class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">-->
+        <!--<property name="dataSource">-->
+            <!--<ref bean="dataSource" />-->
+        <!--</property>-->
+        <!--<property name="hibernateProperties">-->
+            <!--<props>-->
+                <!--<prop key="hibernate.dialect">-->
+                    <!--org.hibernate.dialect.MySQLDialect-->
+                <!--</prop>-->
+                <!--<prop key="hibernate.show_sql">true</prop>-->
+                <!--&lt;!&ndash; 可以自动创建数据库表(create),不创建(none) &ndash;&gt;-->
+                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+        <!--&lt;!&ndash; 包扫描的方式加载注解类(推荐) &ndash;&gt;-->
+        <!--<property name="packagesToScan">-->
+            <!--<list>-->
+                <!--<value>com.zou.*</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash;JDBC事务管理器,根据你的情况使用不同的事务管理器,如果工程中有Hibernate,就用Hibernate的事务管理器 &ndash;&gt;-->
+        <!--<bean id="transactionManager"-->
+          <!--class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource">-->
+            <!--<ref local="dataSource" />-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 用注解来实现事务管理 &ndash;&gt;-->
+    <!--<tx:annotation-driven transaction-manager="transactionManager" />-->
+</beans>
