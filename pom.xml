@@ -140,11 +140,11 @@
       <version>${c3p0.version}</version>
     </dependency>
     <!-- 扩展Java类与实现Java接口 -->
-    <!--<dependency>-->
-      <!--<groupId>cglib</groupId>-->
-      <!--<artifactId>cglib</artifactId>-->
-      <!--<version>${cglib.version}</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+      <version>${cglib.version}</version>
+    </dependency>
     <!--JSON处理-->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -160,7 +160,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <build>
-    <finalName>zou</finalName>
-  </build>
+  <!--<build>-->
+    <!--<finalName>zou</finalName>-->
+  <!--</build>-->
 </project>
