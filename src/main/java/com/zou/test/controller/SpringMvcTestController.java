@@ -1,5 +1,6 @@
 package com.zou.test.controller;
 
+import com.zou.test.service.ISysUserService;
 import com.zou.test.service.SpringMvcTestService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +15,14 @@ import javax.annotation.Resource;
 public class SpringMvcTestController {
     @Resource
     private SpringMvcTestService springMvcTestServicel;
-//    @Resource
-//    private ISysUserService sysUserService;
+    @Resource
+    private ISysUserService sysUserService;
 
 
     @RequestMapping("/a")
     public String showUser(Model model){
         springMvcTestServicel.HelloMvc();
-//        sysUserService.findSysUser(1);
+        sysUserService.findSysUser(1);
         return "test";
     }
 }
