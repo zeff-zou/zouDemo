@@ -14,9 +14,9 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
  * @author AdminTC
  * 注意：不能new这个BaseDao<T>，只能用其子类，例如：AdminDao，GroupDao
  */
-public class BaseDao<T> extends HibernateDaoSupport {
+public class BaseDao<T , PK extends Serializable> extends HibernateDaoSupport {
 
-    private Class clazz = null;//字节码Admin.class
+    private Class<T> entityClass = null;//字节码Admin.class
     @Autowired
     public void setSessionFactoryOverride(SessionFactory sessionFactory)
     {
@@ -35,7 +35,61 @@ public class BaseDao<T> extends HibernateDaoSupport {
         //获取泛型类的实际参数类型，例如：Admin
         Type[] types = pt.getActualTypeArguments();
         //获取数组中第一个元素，该元素就是Admin字节码
-        this.clazz = (Class) types[0];
+        this.entityClass = (Class) types[0];
+    }
+    protected Class<T> getEntityClass() {
+        return entityClass;
+    }
+
+
+    public T getById(PK id) {
+        return (T)currentSession().get(getEntityClass(), id);
+    }
+
+    /**
+     * 保存记录.
+     *
+     * @param obj
+     */
+    public void save(T obj) {
+        currentSession().save(obj);
+    }
+    /**
+     * 保存或修改记录.
+     *
+     * @param obj
+     */
+    public void saveOrUpdate(T obj) {
+        currentSession().saveOrUpdate(obj);
+    }
+
+    /**
+     * 修改记录.
+     *
+     * @param obj
+     */
+    public void update(T obj) {
+        currentSession().update(obj);
+    }
+
+    /**
+     * 删除记录.
+     *
+     * @param obj
+     */
+    public void delete(T obj) {
+        currentSession().delete(obj);
+    }
+    /**
+     * 根据ID删除记录.
+     *
+     * @param id
+     */
+    public void deleteById(PK id) {
+        T obj = getById(id);
+        if (obj != null) {
+            delete(obj);
+        }
     }
 }
 

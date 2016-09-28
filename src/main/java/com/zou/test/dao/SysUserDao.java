@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Administrator on 2016/9/25.
  */
 @Repository
-public class SysUserDao extends BaseDao<SysUser> {
+public class SysUserDao extends BaseDao<SysUser,Integer> {
     public SysUser findSysUser(Integer id){
         Session session = this.currentSession();
 //        List list = session.createQuery("from SysUser where sysUserId="+id).list();
