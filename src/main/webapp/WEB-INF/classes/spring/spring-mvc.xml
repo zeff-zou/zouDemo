@@ -16,7 +16,27 @@
     <context:component-scan base-package="com.zou.**.controller"/>
 
     <!-- 配置注解驱动 -->
-    <mvc:annotation-driven/>
+    <!-- 解决@ResponseBody注解直接返回对象并转换成JSON时出现406问题 -->
+    <mvc:annotation-driven />
+        <!--<mvc:message-converters>-->
+            <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter">-->
+                <!--<property name="supportedMediaTypes">-->
+                    <!--<list>-->
+                        <!--<value>text/plain;charset=UTF-8</value>-->
+                        <!--<value>text/html;charset=UTF-8</value>-->
+                    <!--</list>-->
+                <!--</property>-->
+            <!--</bean>-->
+            <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+                <!--<property name="supportedMediaTypes">-->
+                    <!--<list>-->
+                        <!--<value>application/json; charset=UTF-8</value>-->
+                        <!--<value>application/x-www-form-urlencoded; charset=UTF-8</value>-->
+                    <!--</list>-->
+                <!--</property>-->
+            <!--</bean>-->
+        <!--</mvc:message-converters>-->
+    <!--</mvc:annotation-driven>-->
 
     <!--静态资源映射-->
     <!--
@@ -37,8 +57,6 @@
         <property name="prefix" value="/WEB-INF/view/"/><!--设置JSP文件的目录位置-->
         <property name="suffix" value=".jsp"/>
     </bean>
-
-
     <!--&lt;!&ndash; 文件上传 start 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 &ndash;&gt;-->
     <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
         <!--&lt;!&ndash; 默认编码 &ndash;&gt;-->

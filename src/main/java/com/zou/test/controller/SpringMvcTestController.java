@@ -4,12 +4,14 @@ import com.zou.test.domain.SysUser;
 import com.zou.test.service.ISysUserService;
 import com.zou.test.service.SpringMvcTestService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2016/9/24.
@@ -31,10 +33,10 @@ public class SpringMvcTestController {
     }
 
     @RequestMapping(value = "/select",method = RequestMethod.POST)
-    public String selectUser(ModelMap model, Integer id){
+    @ResponseBody
+    public SysUser selectUser(Integer id){
         SysUser user = sysUserService.findSysUser(id);
-        model.put("SysUser",user);
-        return "test";
+        return user;
     }
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
