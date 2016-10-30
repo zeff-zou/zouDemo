@@ -9,9 +9,9 @@ public interface ISysUserService {
 
     SysUser findSysUser(Integer id);
 
-    void addSysUser(SysUser sysUser);
-
-    void deleteSysUser(Integer id);
-
-    void updateSysUser(SysUser sysUser);
+//    void addSysUser(SysUser sysUser);
+//
+//    void deleteSysUser(Integer id);
+//
+//    void updateSysUser(SysUser sysUser);
 }

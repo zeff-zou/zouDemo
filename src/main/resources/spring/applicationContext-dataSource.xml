@@ -4,77 +4,91 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:tx="http://www.springframework.org/schema/tx"
         xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
         xsi:schemaLocation="http://www.springframework.org/schema/beans
 	  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 	  http://www.springframework.org/schema/tx
-      http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-    <!-- 注册LocalSessionFactoryBean -->
-    <!--<bean id="localSessionFactoryBean" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
-        <!--<property name="configLocation">-->
-            <!--&lt;!&ndash; main运行和tomcat运行路径含义是不相同的 &ndash;&gt;-->
-            <!--<value>classpath:/hibernate/hibernate.cfg.xml</value>-->
-        <!--</property>-->
-    <!--</bean>-->
-
-    <!-- 注册HibernateTemplate -->
-    <!--<bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">-->
-        <!--<property name="sessionFactory" ref="localSessionFactoryBean"/>-->
-    <!--</bean>-->
-
-    <!--<bean id="defaultTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">-->
-        <!--<property name="sessionFactory" ref="localSessionFactoryBean" />-->
-    <!--</bean>-->
-
-    <!--<tx:annotation-driven transaction-manager="defaultTransactionManager" proxy-target-class="true" />-->
-
+      http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
     <!-- 注册代理对象 -->
     <!--<aop:config proxy-target-class="true">-->
 
-        <!--<aop:pointcut id="adminTxPointcut" expression="execution(* cn.itcast..AdminService.*(..))"/>-->
-        <!--<aop:pointcut id="groupTxPointcut" expression="execution(* cn.itcast..GroupService.*(..))"/>-->
-        <!--<aop:pointcut id="userTxPointcut" expression="execution(* cn.itcast..UserService.*(..))"/>-->
+    <!--<aop:pointcut id="adminTxPointcut" expression="execution(* cn.itcast..AdminService.*(..))"/>-->
+    <!--<aop:pointcut id="groupTxPointcut" expression="execution(* cn.itcast..GroupService.*(..))"/>-->
+    <!--<aop:pointcut id="userTxPointcut" expression="execution(* cn.itcast..UserService.*(..))"/>-->
 
 
-        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="adminTxPointcut"/>-->
-        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="groupTxPointcut"/>-->
-        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="userTxPointcut"/>-->
+    <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="adminTxPointcut"/>-->
+    <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="groupTxPointcut"/>-->
+    <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="userTxPointcut"/>-->
     <!--</aop:config>-->
-    <!-- 配置数据库连接池（c3p0） -->
     <context:property-placeholder location="classpath*:properties/*.properties"/>
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <!-- 基本信息 -->
-        <property name="jdbcUrl" value="${jdbcUrl}"></property>
-        <property name="driverClass" value="${driverClass}"></property>
-        <property name="user" value="${username}"></property>
-        <property name="password" value="${password}"></property>
-        <!-- 其他配置 -->
-        <!--初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
-        <property name="initialPoolSize" value="3"></property>
-        <!--连接池中保留的最小连接数。Default: 3 -->
-        <property name="minPoolSize" value="3"></property>
-        <!--连接池中保留的最大连接数。Default: 15 -->
-        <property name="maxPoolSize" value="5"></property>
-        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
-        <property name="acquireIncrement" value="3"></property>
-        <!-- 控制数据源内加载的PreparedStatements数量。如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 -->
-        <property name="maxStatements" value="8"></property>
-        <!-- maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。Default: 0 -->
-        <property name="maxStatementsPerConnection" value="5"></property>
-        <!--最大空闲时间,1800秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
-        <property name="maxIdleTime" value="1800"></property>
+    <!-- 配置数据库连接池（Druid） -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- 数据库基本信息配置 -->
+        <property name="driverClassName" value="${driverClass}" />
+        <property name="url" value="${jdbcUrl}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+        <!-- 初始化连接数量 -->
+        <property name="initialSize" value="${app.dataSource.initialSize}" />
+        <!-- 最大并发连接数 -->
+        <property name="maxActive" value="${app.dataSource.maxActive}" />
+        <!-- 最大空闲连接数 -->
+        <property name="maxIdle" value="${app.dataSource.maxIdle}" />
+        <!-- 最小空闲连接数 -->
+        <property name="minIdle" value="${app.dataSource.minIdle}" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${app.dataSource.maxWait}" />
+        <!-- 超过时间限制是否回收 -->
+        <property name="removeAbandoned" value="${app.dataSource.removeAbandoned}" />
+        <!-- 超过时间限制多长； -->
+        <property name="removeAbandonedTimeout" value="${app.dataSource.removeAbandonedTimeout}" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${app.dataSource.timeBetweenEvictionRunsMillis}" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${app.dataSource.minEvictableIdleTimeMillis}" />
+        <!-- 用来检测连接是否有效的sql，要求是一个查询语句-->
+        <property name="validationQuery" value="${app.dataSource.validationQuery}" />
+        <!-- 申请连接的时候检测 -->
+        <property name="testWhileIdle" value="${app.dataSource.testWhileIdle}" />
+        <!-- 申请连接时执行validationQuery检测连接是否有效，配置为true会降低性能 -->
+        <property name="testOnBorrow" value="${app.dataSource.testOnBorrow}" />
+        <!-- 归还连接时执行validationQuery检测连接是否有效，配置为true会降低性能  -->
+        <property name="testOnReturn" value="${app.dataSource.testOnReturn}" />
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="${app.dataSource.poolPreparedStatements}" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${app.dataSource.maxPoolPreparedStatementPerConnectionSize}" />
+        <!--属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有：
+                监控统计用的filter:stat
+                日志用的filter:log4j
+               防御SQL注入的filter:wall -->
+        <property name="filters" value="${app.dataSource.filters}" />
     </bean>
 
-
-    <!-- 配置SessionFactory -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"></property>
-        <property name="packagesToScan">
-            <list>
-                <value>com.zou.*.domain</value>
-            </list>
+    <!-- Jpa Entity Manager 配置 -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- Jpa 持久化实体扫描的实体包位置 -->
+        <property name="packagesToScan" value="com.zou.**.domain"/>
+        <property name="persistenceUnitName" value="${jpa.persistenceUnitName}"/>
+        <property name="persistenceProvider">
+            <bean class="org.hibernate.jpa.HibernatePersistenceProvider"/>
         </property>
-        <property name="hibernateProperties">
+
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="generateDdl" value="${jpa.generateDdl}"/>
+                <property name="database" value="${jpa.database}"/>
+                <property name="databasePlatform" value="${jpa.databasePlatform}"/>
+                <property name="showSql" value="${jpa.showSql}"/>
+            </bean>
+        </property>
+        <property name="jpaDialect">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+        </property>
+        <property name="jpaProperties">
             <props>
+                <prop key="hibernate.hbm2ddl.auto">${app.hibernate.db.hbm2ddl}</prop>
                 <!--常用数据库方言 MySQL5Dialect,SQLServerDialect,OracleDialect,SybaseDialect,DB2Dialect,HSQLDialect -->
                 <prop key="hibernate.dialect">${app.hibernate.dialect}</prop>
                 <prop key="hibernate.show_sql">${app.hibernate.show_sql}</prop>
@@ -84,14 +98,77 @@
                 <prop key="hibernate.max_fetch_depth">${app.hibernate.max_fetch_depth}</prop>
             </props>
         </property>
+        <property name="jpaPropertyMap">
+            <map>
+                <!-- 只扫描class文件，不扫描hbm，默认两个都搜索 -->
+                <entry key="hibernate.archive.autodetection" value="class"/>
+                <!-- 不检查@NamedQuery -->
+                <entry key="hibernate.query.startup_check" value="false"/>
+            </map>
+        </property>
     </bean>
+
+    <!-- 重要配置：启用扫描并自动创建代理的功能  -->
+    <jpa:repositories base-package="com.zou.*.dao"  transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>
+    <!-- Jpa 事务管理器  -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     <!-- 配置事物管理器 -->
     <bean id="defaultTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
     <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     <!-- 配置 Annotation 驱动，定义事务 -->
-    <tx:annotation-driven transaction-manager="defaultTransactionManager" proxy-target-class="true" />
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
     <context:component-scan base-package="com.**.dao"/>
+
+    <!-- 配置 Annotation 驱动，定义事务 -->
+    <!--&lt;!&ndash; 配置SessionFactory &ndash;&gt;-->
+    <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
+    <!--<property name="dataSource" ref="dataSource"></property>-->
+    <!--<property name="packagesToScan">-->
+    <!--<list>-->
+    <!--<value>com.zou.*.domain</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--<property name="hibernateProperties">-->
+    <!--<props>-->
+    <!--&lt;!&ndash;常用数据库方言 MySQL5Dialect,SQLServerDialect,OracleDialect,SybaseDialect,DB2Dialect,HSQLDialect &ndash;&gt;-->
+    <!--<prop key="hibernate.dialect">${app.hibernate.dialect}</prop>-->
+    <!--<prop key="hibernate.show_sql">${app.hibernate.show_sql}</prop>-->
+    <!--<prop key="hibernate.format_sql">${app.hibernate.format_sql}</prop>-->
+    <!--<prop key="hibernate.use_sql_comments">${app.hibernate.use_sql_comments}</prop>-->
+    <!--<prop key="hibernate.default_batch_fetch_size">${app.hibernate.default_batch_fetch_size}</prop>-->
+    <!--<prop key="hibernate.max_fetch_depth">${app.hibernate.max_fetch_depth}</prop>-->
+    <!--</props>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!-- 配置事物管理器 -->
+    <!--<bean id="defaultTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">-->
+    <!--<property name="sessionFactory" ref="entityManagerFactory" />-->
+    <!--</bean>-->
+    <!-- 配置数据库连接池（c3p0） -->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+    <!--&lt;!&ndash; 基本信息 &ndash;&gt;-->
+    <!--<property name="jdbcUrl" value="${jdbcUrl}"></property>-->
+    <!--<property name="driverClass" value="${driverClass}"></property>-->
+    <!--<property name="user" value="${username}"></property>-->
+    <!--<property name="password" value="${password}"></property>-->
+    <!--&lt;!&ndash; 其他配置 &ndash;&gt;-->
+    <!--&lt;!&ndash;初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 &ndash;&gt;-->
+    <!--<property name="initialPoolSize" value="3"></property>-->
+    <!--&lt;!&ndash;连接池中保留的最小连接数。Default: 3 &ndash;&gt;-->
+    <!--<property name="minPoolSize" value="3"></property>-->
+    <!--&lt;!&ndash;连接池中保留的最大连接数。Default: 15 &ndash;&gt;-->
+    <!--<property name="maxPoolSize" value="5"></property>-->
+    <!--&lt;!&ndash;当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 &ndash;&gt;-->
+    <!--<property name="acquireIncrement" value="3"></property>-->
+    <!--&lt;!&ndash; 控制数据源内加载的PreparedStatements数量。如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 &ndash;&gt;-->
+    <!--<property name="maxStatements" value="8"></property>-->
+    <!--&lt;!&ndash; maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。Default: 0 &ndash;&gt;-->
+    <!--<property name="maxStatementsPerConnection" value="5"></property>-->
+    <!--&lt;!&ndash;最大空闲时间,1800秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 &ndash;&gt;-->
+    <!--<property name="maxIdleTime" value="1800"></property>-->
+    <!--</bean>-->
 </beans>
 
 
