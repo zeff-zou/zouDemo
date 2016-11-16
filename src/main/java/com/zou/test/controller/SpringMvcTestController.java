@@ -39,20 +39,20 @@ public class SpringMvcTestController {
         return user;
     }
 
-//    @RequestMapping(value = "/add",method = RequestMethod.POST)
-//    public void addUser(ModelMap model, SysUser sysUser){
-//        sysUserService.addSysUser(sysUser);
-//        model.put("isAdd","Y");
-//    }
-//    @RequestMapping(value = "/delete",method = RequestMethod.POST)
-//    public void delete(ModelMap model,Integer id){
-//        sysUserService.deleteSysUser(id);
-//        model.put("isAdd","Y");
-//    }
-//
-//    @RequestMapping(value = "/update",method = RequestMethod.POST)
-//    public void update(ModelMap model,Integer id){
-//        sysUserService.deleteSysUser(id);
-//        model.put("isAdd","Y");
-//    }
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public void addUser(ModelMap model, SysUser sysUser){
+        sysUserService.addSysUser(sysUser);
+        model.put("isAdd","Y");
+    }
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public void delete(ModelMap model,Integer id){
+        sysUserService.deleteSysUser(id);
+        model.put("isAdd","Y");
+    }
+
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public void update(ModelMap model,Integer id){
+        sysUserService.deleteSysUser(id);
+        model.put("isAdd","Y");
+    }
 }

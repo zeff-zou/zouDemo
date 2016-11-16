@@ -17,6 +17,8 @@ import javax.annotation.Resource;
 public class SysUserServiceImpl implements ISysUserService {
     @Resource
     private ISysUserDao sysUserDao;
+
+    @Override
     public SysUser findSysUser(Integer id) {
         return sysUserDao.findOne(id);
     }

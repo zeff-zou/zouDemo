@@ -8,6 +8,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "SYS_USER")
 public class SysUser {
+
+    public static final String SYS_USER_ID = "sysUserId";
+    public static final String USER_NAME = "userName";
+    public static final String USER_AGE = "userAge";
+    public static final String USER_SEX = "userSex";
+
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "SYS_USER_ID", unique = false, nullable = false, insertable = true, updatable = true, length = 20)

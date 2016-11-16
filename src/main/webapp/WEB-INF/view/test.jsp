@@ -14,7 +14,7 @@
                 dataType:"json",
                 data:{id:1},
                 success:function(data){
-                   var sysUser = data.user;
+                   var sysUser = data;
                    alert("id="+sysUser.sysUserId+";name="+sysUser.userName);
 //                    alert("123");
                 },
