@@ -1,5 +1,7 @@
 package com.zou.test.domain;
 
+import com.zou.commons.base.domain.BaseEntity;
+
 import javax.persistence.*;
 
 /**
@@ -7,18 +9,18 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "SYS_USER")
-public class SysUser {
+public class SysUser extends BaseEntity<Integer>{
 
-    public static final String SYS_USER_ID = "sysUserId";
+//    public static final String SYS_USER_ID = "sysUserId";
     public static final String USER_NAME = "userName";
     public static final String USER_AGE = "userAge";
     public static final String USER_SEX = "userSex";
 
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "SYS_USER_ID", unique = false, nullable = false, insertable = true, updatable = true, length = 20)
-    private java.lang.Integer sysUserId;
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.AUTO)
+//    @Column(name = "SYS_USER_ID", unique = false, nullable = false, insertable = true, updatable = true, length = 20)
+//    private java.lang.Integer sysUserId;
     /**
      * userName       db_column: USER_NAME
      */
@@ -31,13 +33,13 @@ public class SysUser {
     @Column(name = "USER_SEX", unique = false, nullable = false, insertable = true, updatable = true, length = 2)
     private java.lang.Integer userSex;
 
-    public Integer getSysUserId() {
-        return sysUserId;
-    }
-
-    public void setSysUserId(Integer sysUserId) {
-        this.sysUserId = sysUserId;
-    }
+//    public Integer getSysUserId() {
+//        return sysUserId;
+//    }
+//
+//    public void setSysUserId(Integer sysUserId) {
+//        this.sysUserId = sysUserId;
+//    }
 
     public String getUserName() {
         return userName;

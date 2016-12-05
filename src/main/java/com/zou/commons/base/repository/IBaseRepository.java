@@ -1,4 +1,4 @@
-package com.zou.commons.base.dao;
+package com.zou.commons.base.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;

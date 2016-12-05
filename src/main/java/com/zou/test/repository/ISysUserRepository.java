@@ -1,6 +1,6 @@
 package com.zou.test.repository;
 
-import com.zou.commons.base.dao.IBaseRepository;
+import com.zou.commons.base.repository.IBaseRepository;
 import com.zou.test.domain.SysUser;
 
 /**

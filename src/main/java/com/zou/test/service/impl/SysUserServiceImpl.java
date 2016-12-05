@@ -38,7 +38,7 @@ public class SysUserServiceImpl implements ISysUserService {
     @Override
     @Transactional
     public void updateSysUser(SysUser sysUser) {
-        SysUser user = sysUserRepository.findOne(sysUser.getSysUserId());
+        SysUser user = sysUserRepository.findOne(sysUser.getId());
         if (user==null){
             throw new RuntimeException("没有这个用户，更新失败!");
         }
