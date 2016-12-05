@@ -10,6 +10,6 @@ import java.io.Serializable;
  * Created by zzf on 2016/11/3.
  */
 @NoRepositoryBean
-public interface IBaseDao<M, ID extends Serializable> extends JpaRepository<M, ID>{
+public interface IBaseRepository<M, ID extends Serializable> extends JpaRepository<M, ID>{
 
 }

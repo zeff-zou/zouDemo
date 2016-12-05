@@ -5,6 +5,18 @@
   <artifactId>zou</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
   <name>zou Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -23,7 +35,7 @@
     <jackson-databind.version>2.8.3</jackson-databind.version>
     <!--<jackson-mapper.version>1.9.13</jackson-mapper.version>-->
     <druid.vsersion>1.0.26</druid.vsersion>
-    <spring-data-jpa.version>1.10.4.RELEASE</spring-data-jpa.version>
+    <spring-data-jpa.version>1.6.0.RELEASE</spring-data-jpa.version>
     <hibernate-entitymanager.version>4.3.7.Final</hibernate-entitymanager.version>
   </properties>
   <dependencies>

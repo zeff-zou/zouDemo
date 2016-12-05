@@ -1,6 +1,6 @@
-package com.zou.test.dao.impl;
+package com.zou.test.repository.impl;
 
-import com.zou.test.dao.ISysUserDaoCustom;
+import com.zou.test.repository.SysUserRepositoryCustom;
 import com.zou.test.domain.SysUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -19,11 +19,17 @@ import java.util.Map;
 /**
  * Created by zzf on 2016/11/3.
  */
-public class SysDaoImpl implements ISysUserDaoCustom {
+public class SysUserRepositoryCustomImpl implements SysUserRepositoryCustom {
     @Resource
     private JdbcTemplate jdbcTemplate;
 
     @Override
+    public void updateUser() {
+        String sql="UPDATE SYS_USER SET USER_NAME='aaa'";
+        jdbcTemplate.update(sql);
+    }
+
+
     public Page<SysUser> query(Pageable pageable, String userName) {
         StringBuffer sql = new StringBuffer();
         sql.append(" FROM SYS_USER WHERE 1=1");

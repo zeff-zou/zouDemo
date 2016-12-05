@@ -105,16 +105,17 @@
         <constructor-arg ref="dataSource" />
     </bean>
     <!-- 重要配置：启用扫描并自动创建代理的功能  -->
-    <jpa:repositories base-package="com.zou.**.dao"
+    <jpa:repositories base-package="com.zou.**.repository"
                       repository-impl-postfix="Impl"
-                      transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>
+                      transaction-manager-ref="transactionManager"
+                      entity-manager-factory-ref="entityManagerFactory"/>
     <!-- Jpa 事务管理器  -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     <!-- 配置 Annotation 驱动，定义事务 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
-    <context:component-scan base-package="com.**.dao"/>
+    <context:component-scan base-package="com.**.repository"/>
 
     <!--&lt;!&ndash; 配置SessionFactory &ndash;&gt;-->
     <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
