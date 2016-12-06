@@ -107,6 +107,7 @@
     <!-- 重要配置：启用扫描并自动创建代理的功能  -->
     <jpa:repositories base-package="com.zou.**.repository"
                       repository-impl-postfix="Impl"
+                      factory-class="com.zou.commons.base.repository.support.BaseRepositoryFactoryBean"
                       transaction-manager-ref="transactionManager"
                       entity-manager-factory-ref="entityManagerFactory"/>
     <!-- Jpa 事务管理器  -->

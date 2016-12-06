@@ -32,23 +32,23 @@ public abstract class BaseEntity<ID extends Serializable> implements Persistable
     private ID id;
 
     @CreatedBy
-    @Column(updatable = false, name = "create_by",nullable = true)
+    @Column(updatable = false, name = "CREATE_BY",nullable = true)
     private String createBy;
 
     @CreatedDate
-    @Column(updatable = false, name = "create_date",nullable = true)
+    @Column(updatable = false, name = "CREATE_DATE",nullable = true)
     private Date createDate;
 
     @LastModifiedBy
-    @Column(name = "last_modified_by",nullable = true)
+    @Column(name = "LAST_MODIFIED_BY",nullable = true)
     private String lastModifiedBy;
 
     @LastModifiedDate
-    @Column(name = "last_modified_date",nullable = true)
+    @Column(name = "LAST_MODIFIED_DATE",nullable = true)
     private Date lastModifiedDate;
 
     @Version
-    @Column(name = "version",nullable = false)
+    @Column(name = "VERSION",nullable = false)
     private Long version;
 
     @Override
