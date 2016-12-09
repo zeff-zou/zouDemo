@@ -1,6 +1,6 @@
-package com.zou.test.repository;
+package com.zou.module.user.repository;
 
-import com.zou.test.domain.SysUser;
+import com.zou.module.user.domain.SysUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

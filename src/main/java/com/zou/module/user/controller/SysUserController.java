@@ -1,4 +1,4 @@
-package com.zou.test.controller;
+package com.zou.module.user.controller;
 
 import com.zou.module.user.domain.SysUser;
 import com.zou.module.user.service.ISysUserService;
@@ -10,32 +10,41 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Created by Administrator on 2016/9/24.
+ * Created by zzf on 2016/12/9.
  */
 @Controller
-@RequestMapping("/test")
-public class SpringMvcTestController {
-    @Resource
-    private SpringMvcTestService springMvcTestServicel;
+@RequestMapping("/admin/modules/sysuser")
+public class SysUserController {
     @Resource
     private ISysUserService sysUserService;
 
     private static final String RESULT = "result";
     protected static final String RESULT_ACTION = "redirect:/result";
 
-    @RequestMapping(value = "/a",method = RequestMethod.GET)
-    public String showUser(ModelMap model){
-        return "test";
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> loginToFront(String loginId, String password, HttpServletRequest request){
+        SysUser sysUser = sysUserService.loginSysUser(loginId, password);
+        Map<String, Object> modelMap = new HashMap<String, Object>(3);
+        if (sysUser!=null){
+           request.getSession().setAttribute("adminUser",sysUser);
+            modelMap.put("success","Y");
+        }else {
+            modelMap.put("success","N");
+        }
+        return modelMap;
     }
 
     @RequestMapping(value = "/select",method = RequestMethod.POST)
     @ResponseBody
     public SysUser selectUser(Integer id){
-//        SysUser user = sysUserService.findSysUser(id);
-        SysUser sysUser = sysUserService.loginSysUser("admin", "098f6bcd4621d373cade4e832627b4f6");
-        return sysUser;
+        SysUser user = sysUserService.findSysUser(id);
+        return user;
     }
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)

@@ -1,13 +1,15 @@
-package com.zou.test.service.impl;
+package com.zou.module.user.service.impl;
 
 
 import com.zou.commons.base.service.impl.AbstractBaseService;
-import com.zou.test.domain.SysUser;
-import com.zou.test.repository.SysUserRepository;
-import com.zou.test.service.ISysUserService;
+import com.zou.module.user.domain.SysUser;
+import com.zou.module.user.repository.SysUserRepository;
+import com.zou.module.user.service.ISysUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by zzf on 2016/9/25.
@@ -46,6 +48,12 @@ public class SysUserServiceImpl extends AbstractBaseService<SysUser,Integer> imp
         }
         BeanUtils.copyProperties(sysUser,user);
             getSysUserRepository().save(user);
+    }
+
+    @Override
+    public SysUser loginSysUser(String loginId, String password) {
+        SysUser user = getSysUserRepository().findByLoginIdAndUserPsw(loginId, password);
+        return user;
     }
 
 

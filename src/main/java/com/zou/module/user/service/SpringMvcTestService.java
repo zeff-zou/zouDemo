@@ -1,4 +1,4 @@
-package com.zou.test.service;
+package com.zou.module.user.service;
 
 import org.springframework.stereotype.Service;
 
