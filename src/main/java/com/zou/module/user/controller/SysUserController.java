@@ -39,7 +39,10 @@ public class SysUserController {
         }
         return modelMap;
     }
-
+    @RequestMapping(value = "/main",method = RequestMethod.GET)
+    public String showUser(ModelMap model){
+        return "admin/main";
+    }
     @RequestMapping(value = "/select",method = RequestMethod.POST)
     @ResponseBody
     public SysUser selectUser(Integer id){

@@ -23,7 +23,7 @@
                  data:{loginId:$("#loginId").val(),password:$.md5($("#userPsw").val())},
                  success:function(data){
                      if ("Y"==data.success){
-                         alert("登录成功");
+                         window.location.href="${webRoot}/admin/modules/sysuser/main.html";
                      }else{
                          alert("登录失败");
                      }
