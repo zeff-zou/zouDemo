@@ -17,13 +17,13 @@
      $(function(){
          $('form').submit(function(){
              $.ajax({
-                 url:"${webRoot}/admin/modules/sysuser/login.json",
+                 url:"${webRoot}/admin/sysuser/login.json",
                  type:"POST",
                  dataType:"json",
                  data:{loginId:$("#loginId").val(),password:$.md5($("#userPsw").val())},
                  success:function(data){
                      if ("Y"==data.success){
-                         window.location.href="${webRoot}/admin/modules/sysuser/main.html";
+                         window.location.href="${webRoot}/admin/sysuser/main.html";
                      }else{
                          alert("登录失败");
                      }

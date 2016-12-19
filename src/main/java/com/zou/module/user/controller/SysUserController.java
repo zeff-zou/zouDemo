@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by zzf on 2016/12/9.
  */
 @Controller
-@RequestMapping("/admin/modules/sysuser")
+@RequestMapping("/admin/sysuser")
 public class SysUserController {
     @Resource
     private ISysUserService sysUserService;
@@ -40,9 +40,15 @@ public class SysUserController {
         return modelMap;
     }
     @RequestMapping(value = "/main",method = RequestMethod.GET)
-    public String showUser(ModelMap model){
+    public String showMain(ModelMap model){
         return "admin/main";
     }
+
+    @RequestMapping(value = "/sysUserList",method = RequestMethod.GET)
+    public String showUserList(ModelMap model){
+        return "admin/sysUser/sysUserList";
+    }
+
     @RequestMapping(value = "/select",method = RequestMethod.POST)
     @ResponseBody
     public SysUser selectUser(Integer id){
