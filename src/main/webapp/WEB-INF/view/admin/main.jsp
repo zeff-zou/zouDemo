@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="${webRoot}/commons/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">--%>
+    <link href="${webRoot}/css/main.css" rel="stylesheet">
     <!-- Ionicons -->
     <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">--%>
     <!-- Theme style -->
@@ -38,20 +39,10 @@
     <!--[if lt IE 9]>
     <!--<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>-->
     <%--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>--%>
-    <![endif]-->
+    <%--<![endif]-->--%>
     <script type="text/javascript">
         var webPath = {webRoot: "${webRoot}"};
     </script>
-    <style type="text/css">
-        .fa {
-            display: inline-block;
-            font: normal normal normal 14px/1 FontAwesome;
-            font-size: inherit;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
