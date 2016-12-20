@@ -56,7 +56,7 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div style="min-height: 1126px;background-color: #ecf0f5;">
+    <div style="background-color: #ecf0f5;">
     <div class="content-wrapper" id="main-content-wrapper">
 
 
