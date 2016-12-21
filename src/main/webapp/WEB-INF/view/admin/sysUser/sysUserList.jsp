@@ -8,10 +8,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <c:set value="${pageContext.request.contextPath}" var="webRoot" />
-<%--<link rel="stylesheet" href="${webRoot}/commons/bootstrap/css/bootstrap.min.css">--%>
 <link rel="stylesheet" href="${webRoot}/commons/bootstrap-table/dist/bootstrap-table.css">
-<%--<script type="text/javascript" src="${webRoot}/commons/plugins/jQuery/jquery-2.2.3.min.js"></script>--%>
-<%--<script type="text/javascript" src="${webRoot}/commons/bootstrap/js/bootstrap.min.js"></script>--%>
+<script type="text/javascript" src="${webRoot}/commons/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="${webRoot}/commons/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${webRoot}/commons/bootstrap-table/dist/bootstrap-table.js"></script>
 <script type="text/javascript" src="${webRoot}/commons/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
 <!-- Content Header (Page header) -->
@@ -35,35 +34,35 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <table data-toggle="table"
-                   data-striped="true"
-                   data-sort-stable="true"
-                   data-page-number="1"
-                   data-page-size="1"
-                   data-page-list="[10, 25, 50]"
-                   data-select-item-name="Item ID"
-                   data-show-refresh="true"
-                   >
-                <thead>
-                <tr>
-                    <th>Item ID</th>
-                    <th>Item Name</th>
-                    <th>Item Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Item 1</td>
-                    <td>$1</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Item 2</td>
-                    <td>$2</td>
-                </tr>
-                </tbody>
-            </table>
+                <table data-toggle="table"
+                       id="roleList"
+                       class="table table-bordered table-striped"
+                       data-url="${webRoot}/admin/sysuser/findSysUserPage.json"
+                       data-search="true"
+                       data-show-refresh="true"
+                       data-show-toggle="true"
+                       data-side-pagination="server"
+                       data-show-columns="true"
+                       data-sort-name="id"
+                       data-page-list="[5, 10, 10]"
+                       data-page-size="10"
+                       data-show-export="true"
+                       data-query-params-type='limit'
+                       data-pagination="true"
+                       data-uniqueId="ID"
+                       data-click-to-select="true"
+                       data-single-select="true"
+                >
+                    <thead>
+                    <tr>
+                        <th data-field="listId"  data-checkbox="true"></th>
+                        <th data-field="id" data-sortable="true">ID</th>
+                        <th data-field="loginId" data-sortable="true">账号</th>
+                        <th data-field="userName" data-sortable="true">名称</th>
+                    </tr>
+                    </thead>
+
+                </table>
         </div>
         <!-- /.box-body -->
     </div>

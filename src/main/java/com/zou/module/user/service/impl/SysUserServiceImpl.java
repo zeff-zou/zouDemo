@@ -6,6 +6,8 @@ import com.zou.module.user.domain.SysUser;
 import com.zou.module.user.repository.SysUserRepository;
 import com.zou.module.user.service.ISysUserService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,6 +56,11 @@ public class SysUserServiceImpl extends AbstractBaseService<SysUser,Integer> imp
     public SysUser loginSysUser(String loginId, String password) {
         SysUser user = getSysUserRepository().findByLoginIdAndUserPsw(loginId, password);
         return user;
+    }
+
+    @Override
+    public Page<SysUser> findSysUserPage(Pageable pageable, String userName) {
+        return getSysUserRepository().query(pageable,userName);
     }
 
 

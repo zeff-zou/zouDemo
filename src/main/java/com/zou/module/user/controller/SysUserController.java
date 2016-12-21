@@ -2,7 +2,10 @@ package com.zou.module.user.controller;
 
 import com.zou.module.user.domain.SysUser;
 import com.zou.module.user.service.ISysUserService;
-import com.zou.module.user.service.SpringMvcTestService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,14 +26,11 @@ public class SysUserController {
     @Resource
     private ISysUserService sysUserService;
 
-    private static final String RESULT = "result";
-    protected static final String RESULT_ACTION = "redirect:/result";
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> loginToFront(String loginId, String password, HttpServletRequest request){
         SysUser sysUser = sysUserService.loginSysUser(loginId, password);
-        Map<String, Object> modelMap = new HashMap<String, Object>(3);
+        Map<String, Object> modelMap = new HashMap<String, Object>();
         if (sysUser!=null){
            request.getSession().setAttribute("adminUser",sysUser);
             modelMap.put("success","Y");
@@ -44,6 +44,16 @@ public class SysUserController {
         return "admin/main";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/findSysUserPage",method = RequestMethod.GET)
+    public  Map<String, Object> findSysUserPage(Integer limit, Integer offset, Pageable pageable){
+        PageRequest pageRequest = new PageRequest(offset/limit,limit,pageable.getSort());
+        Page<SysUser> userPage = sysUserService.findSysUserPage(pageRequest, "");
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        modelMap.put("rows",userPage.getContent());
+        modelMap.put("total",userPage.getTotalElements());
+        return modelMap;
+    }
     @RequestMapping(value = "/sysUserList",method = RequestMethod.GET)
     public String showUserList(ModelMap model){
         return "admin/sysUser/sysUserList";

@@ -17,8 +17,34 @@
 
     <!-- 配置注解驱动 -->
     <!-- 解决@ResponseBody注解直接返回对象并转换成JSON时出现406问题 -->
-    <mvc:annotation-driven />
+    <!--<mvc:annotation-driven />-->
+    <!--<mvc:annotation-driven>-->
+        <!--<mvc:argument-resolvers>-->
+            <!--<bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />-->
+        <!--</mvc:argument-resolvers>-->
+    <!--</mvc:annotation-driven>-->
 
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+        <mvc:message-converters register-defaults="true">
+            <!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8" />
+            </bean>
+            <!-- 将Jackson2HttpMessageConverter的默认格式化输出设为true -->
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="prettyPrint" value="true"/>
+            </bean>
+        </mvc:message-converters>
+        <mvc:argument-resolvers>
+            <!--分页的一个实现 ？-->
+            <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
+            <!--暂时没有 shiro 控制-->
+            <!--
+                        <bean class="com.imall.iportal.shiro.bind.method.CurrUserMethodArgumentResolver"/>
+                        <bean class="com.imall.iportal.shiro.bind.method.CurrUserOrgJobMethodArgumentResolver"/>
+            -->
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
     <!--静态资源映射-->
     <!--
     http://perfy315.iteye.com/blog/2008763
@@ -49,5 +75,17 @@
         <!--<property name="maxInMemorySize" value="4096"/>-->
     <!--</bean>-->
     <!--&lt;!&ndash;文件上传 end&ndash;&gt;-->
-
+    <!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
+    <bean id="contentNegotiationManager"
+          class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="mediaTypes">
+            <value>
+                json=application/json
+                xml=application/xml
+                html=text/html
+            </value>
+        </property>
+        <!--默认的content type -->
+        <property name="defaultContentType" value="text/html"/>
+    </bean>
 </beans>

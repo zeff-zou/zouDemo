@@ -26,7 +26,7 @@ public class SysUserRepositoryImpl implements SysUserRepositoryCustom {
     @Override
     public Page<SysUser> query(Pageable pageable, String userName) {
         StringBuffer sql = new StringBuffer();
-        sql.append(" FROM SYS_USER WHERE 1=1");
+        sql.append(" FROM SYS_USER a WHERE 1=1");
         Map<String, Object> paramMap = new HashMap<String, Object>();
         if (!StringUtils.isEmpty(userName)){
             sql.append(" and USER_NAME LIKE :userName");
