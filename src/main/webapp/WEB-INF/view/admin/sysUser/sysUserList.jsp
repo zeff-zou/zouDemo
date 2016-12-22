@@ -9,10 +9,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <c:set value="${pageContext.request.contextPath}" var="webRoot" />
 <link rel="stylesheet" href="${webRoot}/commons/bootstrap-table/dist/bootstrap-table.css">
-<script type="text/javascript" src="${webRoot}/commons/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script type="text/javascript" src="${webRoot}/commons/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${webRoot}/admin/sysUser/statics/css/sysUserList.css">
+<%--<script type="text/javascript" src="${webRoot}/commons/plugins/jQuery/jquery-2.2.3.min.js"></script>--%>
+<%--<script type="text/javascript" src="${webRoot}/commons/bootstrap/js/bootstrap.min.js"></script>--%>
 <script type="text/javascript" src="${webRoot}/commons/bootstrap-table/dist/bootstrap-table.js"></script>
 <script type="text/javascript" src="${webRoot}/commons/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="${webRoot}/commons/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript" src="${webRoot}/admin/sysUser/statics/js/sysUserList.js"></script>
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -42,11 +44,11 @@
                     <button id="userSearchBtn" class="btn btn-block btn-primary" type="button" style="width:70px;padding:3px 1px;">搜索</button>
             </div>
             <div class="col-sm-1" style="width:auto;margin-top:16px;">
-                <button class="btn btn-block btn-success" type="button" style="width:70px;padding:3px 1px;float:left;margin-right:15px;margin-top: 5px;">添加</button>
-                <button class="btn btn-block btn-warning" type="button" style="width:70px;padding:3px 1px;float:left;margin-right:15px;margin-top: 5px;">编辑</button>
-                <button class="btn btn-block btn-primary" type="button" style="width:70px;padding:3px 1px;float:left;margin-right:15px;margin-top: 5px;">修改密码</button>
-                <button class="btn btn-block btn-info" type="button" style="width:70px;padding:3px 1px;float:left;margin-right:15px;margin-top: 5px;">冻结</button>
-                <button class="btn btn-block btn-danger" type="button" style="width:70px;padding:3px 1px;float:left;margin-right:15px;margin-top: 5px;">删除</button>
+                <button class="btn btn-block btn-success" data-toggle="modal" data-target="#showSysRoleModal" type="button" >添加</button>
+                <button class="btn btn-block btn-warning" type="button" >编辑</button>
+                <button class="btn btn-block btn-primary" type="button" >修改密码</button>
+                <button class="btn btn-block btn-info" type="button" >冻结</button>
+                <button class="btn btn-block btn-danger" type="button" >删除</button>
 
             </div>
                 <table data-toggle="table"
@@ -66,8 +68,7 @@
                        data-pagination="true"
                        data-uniqueId="ID"
                        data-click-to-select="true"
-                       data-single-select="true"
-                >
+                       data-single-select="true">
                     <thead>
                     <tr>
                         <th data-field="listId"  data-checkbox="true"></th>
@@ -87,3 +88,6 @@
         <!-- /.box-body -->
     </div>
 </section>
+<div class="modal fade" role="dialog" id="showSysRoleModal">
+<jsp:include page="sysUserEditor.jsp"/>
+</div>
