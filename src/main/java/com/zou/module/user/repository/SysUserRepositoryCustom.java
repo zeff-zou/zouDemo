@@ -8,5 +8,5 @@ import org.springframework.data.domain.Pageable;
  * Created by zzf on 2016/11/3.
  */
 public interface SysUserRepositoryCustom {
-    Page<SysUser> query(Pageable pageable, String userName);
+    Page<SysUser> query(Pageable pageable, String searchUser);
 }

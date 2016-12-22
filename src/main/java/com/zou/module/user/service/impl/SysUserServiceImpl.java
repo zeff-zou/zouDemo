@@ -59,8 +59,8 @@ public class SysUserServiceImpl extends AbstractBaseService<SysUser,Integer> imp
     }
 
     @Override
-    public Page<SysUser> findSysUserPage(Pageable pageable, String userName) {
-        return getSysUserRepository().query(pageable,userName);
+    public Page<SysUser> findSysUserPage(Pageable pageable, String searchUser) {
+        return getSysUserRepository().query(pageable,searchUser);
     }
 
 

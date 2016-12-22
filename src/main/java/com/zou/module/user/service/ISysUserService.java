@@ -20,5 +20,5 @@ public interface ISysUserService extends IBaseService<SysUser, Integer> {
 
     SysUser loginSysUser(String loginId, String password);
 
-    Page<SysUser> findSysUserPage(Pageable pageable, String userName);
+    Page<SysUser> findSysUserPage(Pageable pageable, String searchUser);
 }

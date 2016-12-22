@@ -24,13 +24,15 @@ public class SysUserRepositoryImpl implements SysUserRepositoryCustom {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public Page<SysUser> query(Pageable pageable, String userName) {
+    public Page<SysUser> query(Pageable pageable, String searchUser) {
         StringBuffer sql = new StringBuffer();
         sql.append(" FROM SYS_USER a WHERE 1=1");
         Map<String, Object> paramMap = new HashMap<String, Object>();
-        if (!StringUtils.isEmpty(userName)){
-            sql.append(" and USER_NAME LIKE :userName");
-            paramMap.put(SysUser.USER_NAME, "%" + userName + "%");
+        if (!StringUtils.isEmpty(searchUser)){
+            sql.append(" and ( USER_NAME LIKE :userName");
+            paramMap.put(SysUser.USER_NAME, "%" + searchUser + "%");
+            sql.append(" or LOGIN_ID LIKE :loginId ) ");
+            paramMap.put(SysUser.LOGIN_ID, "%" + searchUser + "%");
         }
         int pageSize = pageable.getPageSize();
         int firstIdx = pageable.getPageNumber() * pageSize;

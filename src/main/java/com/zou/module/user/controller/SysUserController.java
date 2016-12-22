@@ -46,9 +46,9 @@ public class SysUserController {
 
     @ResponseBody
     @RequestMapping(value = "/findSysUserPage",method = RequestMethod.GET)
-    public  Map<String, Object> findSysUserPage(Integer limit, Integer offset, Pageable pageable){
+    public  Map<String, Object> findSysUserPage(Integer limit, Integer offset,String searchUser, Pageable pageable){
         PageRequest pageRequest = new PageRequest(offset/limit,limit,pageable.getSort());
-        Page<SysUser> userPage = sysUserService.findSysUserPage(pageRequest, "");
+        Page<SysUser> userPage = sysUserService.findSysUserPage(pageRequest, searchUser);
         Map<String, Object> modelMap = new HashMap<String, Object>();
         modelMap.put("rows",userPage.getContent());
         modelMap.put("total",userPage.getTotalElements());

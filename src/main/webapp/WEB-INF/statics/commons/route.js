@@ -144,4 +144,6 @@ function querystring(req,next){
         $("#main-content-wrapper").load(webPath.webRoot+req.path+".html");
         next();
     });
-route.start();
+$(function(){
+    route.start();
+});

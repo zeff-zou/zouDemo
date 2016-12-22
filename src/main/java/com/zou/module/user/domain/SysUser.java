@@ -73,6 +73,14 @@ public class SysUser extends BaseEntity<Integer>{
     @Column(name = "IS_ADMIN", unique = false, nullable = true, insertable = true, updatable = true, length = 2)
     private java.lang.String isAdmin;
 
+    public String getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(String isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
     public String getUserName() {
         return userName;
     }
