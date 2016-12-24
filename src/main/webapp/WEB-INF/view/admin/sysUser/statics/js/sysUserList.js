@@ -135,29 +135,6 @@ $(function(){
         });
         return false;
     });
-
-    $("#alertUserPswForm").submit(function(){
-        $.ajax({
-            url:webPath.webRoot+"/admin/sysuser/alertPsw.json",
-            type:"POST",
-            dataType:"json",
-            data:{id:$("#alertUserId").val(),userPsw:$.md5($("#alertUserPsw").val())},
-            success:function(data){
-                if ("Y"==data.isAlertPsw){
-                    alert("修改密码成功！");
-                    $("#userList").bootstrapTable('refresh');
-                    $('#showAlertPsw').modal('hide')
-                }
-            },
-            error: function(XMLHttpRequest, status){
-                if (XMLHttpRequest.status == 500) {
-                    //var result = eval("(" + XMLHttpRequest.responseText + ")");
-                    alert("系统出现错误，修改失败");
-                }
-            }
-        });
-        return false;
-    });
 });
 
 function buildUserEditor(sysUser){
@@ -206,4 +183,32 @@ function validatelt(inputelement,err){
         inputelement.setCustomValidity("");
         return true;
     }
+}
+
+function alertUserPswFct(){
+        var userpsw= $("#alertUserPsw").val();
+        var re = /^[A-Za-z0-9]{4,20}$/;
+        if (!re.test(userpsw)){
+            alert("密码长度至少为六位，且不能有中文");
+            return;
+        }
+        $.ajax({
+            url:webPath.webRoot+"/admin/sysuser/alertPsw.json",
+            type:"POST",
+            dataType:"json",
+            data:{id:$("#alertUserId").val(),userPsw:$.md5(userpsw)},
+            success:function(data){
+                if ("Y"==data.isAlertPsw){
+                    alert("修改密码成功！");
+                    $("#userList").bootstrapTable('refresh');
+                    $('#showAlertPsw').modal('hide')
+                }
+            },
+            error: function(XMLHttpRequest, status){
+                if (XMLHttpRequest.status == 500) {
+                    //var result = eval("(" + XMLHttpRequest.responseText + ")");
+                    alert("系统出现错误，修改失败");
+                }
+            }
+        });
 }

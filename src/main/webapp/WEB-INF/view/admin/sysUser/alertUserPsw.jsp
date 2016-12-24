@@ -6,7 +6,6 @@
             <button type="button" class="close ngdialog-custom-close" data-dismiss="modal" aria-label="Close"><span class="ngdialog-custom-close" aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">修改密码</h4>
         </div>
-        <form  w5c-form-validate="validateOptions" name="validateForm" id="alertUserPswForm" class="form-horizontal  w5c-form">
             <div class="modal-body">
                     <input type="hidden" id="alertUserId"/>
                     <div class="form-group" style="height:40px">
@@ -17,9 +16,8 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="submit"  name="submit" class="btn btn-primary">保存</button>
+                <button type="button"  name="submit" class="btn btn-primary" onclick="alertUserPswFct()">保存</button>
                 <button type="button" class="btn btn-default ngdialog-custom-close" data-dismiss="modal">关闭</button>
             </div>
-        </form>
     </div>
 </div>

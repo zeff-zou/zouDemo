@@ -35,16 +35,26 @@ public class SysUserServiceImpl extends AbstractBaseService<SysUser,Integer> imp
     @Override
     @Transactional
     public String addSysUser(SysUser sysUser) {
-        if (getSysUserRepository().findByLoginId(sysUser.getLoginId())!=null){
+        if (!StringUtils.isEmpty(sysUser.getLoginId())&&getSysUserRepository().findByLoginId(sysUser.getLoginId())!=null){
             return "repeated loginId";
         }
-        if (getSysUserRepository().findByUserEmail(sysUser.getUserEmail())!=null){
-            return  "repeated userEmail";
+        if (!StringUtils.isEmpty(sysUser.getUserEmail())){
+            if (getSysUserRepository().findByUserEmail(sysUser.getUserEmail())!=null){
+                return  "repeated userEmail";
+            }
+        }else {
+            sysUser.setUserEmail(null);
         }
-        if (getSysUserRepository().findByUserMobile(sysUser.getUserMobile())!=null){
-            return  "repeated userMobile";
+        if (!StringUtils.isEmpty(sysUser.getUserMobile())){
+            if (getSysUserRepository().findByUserMobile(sysUser.getUserMobile())!=null){
+                return  "repeated userMobile";
+            }
+        }else {
+            sysUser.setUserMobile(null);
         }
+
         sysUser.setCreateDate(new Date());
+        sysUser.setUserPsw(MD5Tools.MD5(sysUser.getUserPsw()));
         getSysUserRepository().save(sysUser);
         return "success";
     }

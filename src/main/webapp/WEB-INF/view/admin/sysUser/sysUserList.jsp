@@ -69,13 +69,13 @@
                     <tr>
                         <th data-field="listId"  data-checkbox="true"></th>
                         <th data-field="id" data-sortable="true">ID</th>
-                        <th data-field="loginId" data-sortable="true">账号</th>
-                        <th data-field="userName" data-sortable="true">名称</th>
-                        <th data-field="userSex" data-sortable="true" data-formatter="userSexFormatter">用户性别</th>
-                        <th data-field="userMobile" data-sortable="true">用户手机</th>
-                        <th data-field="userEmail" data-sortable="true">用户邮箱</th>
-                        <th data-field="createDateString" data-sortable="true">注册时间</th>
-                        <th data-field="isAdmin" data-sortable="true">是否管理员</th>
+                        <th data-field="loginId" data-sortable="false">账号</th>
+                        <th data-field="userName" data-sortable="false">名称</th>
+                        <th data-field="userSex" data-sortable="false" data-formatter="userSexFormatter">用户性别</th>
+                        <th data-field="userMobile" data-sortable="false">用户手机</th>
+                        <th data-field="userEmail" data-sortable="false">用户邮箱</th>
+                        <th data-field="createDateString" data-sortable="false">注册时间</th>
+                        <th data-field="isAdmin" data-sortable="false">是否管理员</th>
                     </tr>
                     </thead>
 
