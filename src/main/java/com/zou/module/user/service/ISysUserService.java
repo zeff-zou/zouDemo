@@ -12,11 +12,11 @@ public interface ISysUserService extends IBaseService<SysUser, Integer> {
 
     SysUser findSysUser(Integer id);
 
-    void addSysUser(SysUser sysUser);
+    String addSysUser(SysUser sysUser);
 
     void deleteSysUser(Integer id);
 
-    void updateSysUser(SysUser sysUser);
+    String updateSysUser(SysUser sysUser);
 
     SysUser loginSysUser(String loginId, String password);
 

@@ -8,7 +8,7 @@ $(function(){
         });
     });
     $('#validateForm').submit(function(){
-        //console.log(document.validateForm.submit.value);
+        console.log(document.validateForm.submit.value);
         var userUrl=webPath.webRoot+'/admin/sysuser/add.json';
         var userdetil="添加";
         if (document.validateForm.submit.value !="addSysUser"){
@@ -21,16 +21,20 @@ $(function(){
             dataType:"json",
             data:$('#validateForm').serialize(),
             success:function(data){
-                if ("Y"==data.success){
+                if ("success"==data.success){
                     alert(userdetil+"成功");
-                }else{
-                    alert(userdetil+"失败");
+                }else if ("repeated loginId"==data.success){
+                    alert("用户账号已存在，不能重复");
+                }else if ("repeated userEmail"==data.success){
+                    alert("用户邮箱已存在，不能重复");
+                }else if ("repeated userMobile"==data.success){
+                    alert("用户手机号已存在，不能重复");
                 }
             },
             error: function(XMLHttpRequest, status){
                 if (XMLHttpRequest.status == 500) {
-                    var result = eval("(" + XMLHttpRequest.responseText + ")");
-                    alert(result.errorObject.errorText);
+                    //var result = eval("(" + XMLHttpRequest.responseText + ")");
+                    alert("系统错误，操作失败！");
                 }
             }
         });

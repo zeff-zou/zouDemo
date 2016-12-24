@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 /**
  * Created by zzf on 2016/9/25.
@@ -31,8 +30,18 @@ public class SysUserServiceImpl extends AbstractBaseService<SysUser,Integer> imp
 
     @Override
     @Transactional
-    public void addSysUser(SysUser sysUser) {
+    public String addSysUser(SysUser sysUser) {
+        if (getSysUserRepository().findByLoginId(sysUser.getLoginId())!=null){
+            return "repeated loginId";
+        }
+        if (getSysUserRepository().findByUserEmail(sysUser.getUserEmail())!=null){
+            return  "repeated userEmail";
+        }
+        if (getSysUserRepository().findByUserMobile(sysUser.getUserMobile())!=null){
+            return  "repeated userMobile";
+        }
         getSysUserRepository().save(sysUser);
+        return "success";
     }
 
     @Override
@@ -43,13 +52,14 @@ public class SysUserServiceImpl extends AbstractBaseService<SysUser,Integer> imp
 
     @Override
     @Transactional
-    public void updateSysUser(SysUser sysUser) {
+    public String updateSysUser(SysUser sysUser) {
         SysUser user = getSysUserRepository().findOne(sysUser.getId());
         if (user==null){
             throw new RuntimeException("没有这个用户，更新失败!");
         }
         BeanUtils.copyProperties(sysUser,user);
-            getSysUserRepository().save(user);
+        getSysUserRepository().save(user);
+        return "success";
     }
 
     @Override

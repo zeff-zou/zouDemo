@@ -54,10 +54,10 @@
                       <label class="control-label col-md-5"><span style='color:red'>*</span>&nbsp;是否管理员：</label>
                       <div class="col-md-7">
                           <label class="radio-inline">
-                              <input  type="radio" name="isAdmin"  value="0" required> 是
+                              <input  type="radio" name="isAdmin"  value="Y" required> 是
                           </label>
                           <label class="radio-inline">
-                              <input type="radio" name="isAdmin"   value="1" required> 否
+                              <input type="radio" name="isAdmin"   value="N" required> 否
                           </label>
                       </div>
                   </div>

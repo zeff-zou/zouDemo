@@ -10,4 +10,10 @@ import java.util.List;
  */
 public interface SysUserRepository extends IBaseRepository<SysUser,Integer>,SysUserRepositoryCustom {
     SysUser findByLoginIdAndUserPsw(String loginId, String password);
+
+    SysUser findByLoginId(String loginId);
+
+    SysUser findByUserMobile(String userMobile);
+
+    SysUser findByUserEmail(String userEmail);
 }

@@ -72,9 +72,9 @@ public class SysUserController {
         SysUser adminUser = (SysUser) request.getSession().getAttribute("adminUser");
         sysUser.setCreateBy(adminUser.getLoginId());
         sysUser.setLastModifiedBy(adminUser.getLoginId());
-        sysUserService.addSysUser(sysUser);
+        String userSuccess = sysUserService.addSysUser(sysUser);
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        modelMap.put("success","Y");
+        modelMap.put("success",userSuccess);
         return modelMap;
     }
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
