@@ -40,8 +40,8 @@
                     <button id="userSearchBtn" class="btn btn-block btn-primary" type="button" style="width:70px;padding:3px 1px;">搜索</button>
             </div>
             <div class="col-sm-1" style="width:auto;margin-top:16px;">
-                <button class="btn btn-block btn-success" data-toggle="modal" data-target="#showSysRoleModal" type="button" >添加</button>
-                <button class="btn btn-block btn-warning" type="button" >编辑</button>
+                <button class="btn btn-block btn-success" id="addUserBtn" type="button" >添加</button>
+                <button class="btn btn-block btn-warning" id="updateUserBtn" type="button" >编辑</button>
                 <button class="btn btn-block btn-primary" type="button" >修改密码</button>
                 <button class="btn btn-block btn-info" type="button" >冻结</button>
                 <button class="btn btn-block btn-danger" type="button" >删除</button>

@@ -2,6 +2,7 @@ package com.zou.module.user.service.impl;
 
 
 import com.zou.commons.base.service.impl.AbstractBaseService;
+import com.zou.commons.base.util.MD5Tools;
 import com.zou.module.user.domain.SysUser;
 import com.zou.module.user.repository.SysUserRepository;
 import com.zou.module.user.service.ISysUserService;
@@ -10,6 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import java.util.Date;
 
 
 /**
@@ -40,6 +44,7 @@ public class SysUserServiceImpl extends AbstractBaseService<SysUser,Integer> imp
         if (getSysUserRepository().findByUserMobile(sysUser.getUserMobile())!=null){
             return  "repeated userMobile";
         }
+        sysUser.setCreateDate(new Date());
         getSysUserRepository().save(sysUser);
         return "success";
     }
@@ -53,11 +58,33 @@ public class SysUserServiceImpl extends AbstractBaseService<SysUser,Integer> imp
     @Override
     @Transactional
     public String updateSysUser(SysUser sysUser) {
+        MD5Tools.MD5("123456");
         SysUser user = getSysUserRepository().findOne(sysUser.getId());
         if (user==null){
             throw new RuntimeException("没有这个用户，更新失败!");
         }
-        BeanUtils.copyProperties(sysUser,user);
+        if (!StringUtils.isEmpty(sysUser.getUserEmail())){
+            if (!sysUser.getUserEmail().equals(user.getUserEmail()) && getSysUserRepository().findByUserEmail(sysUser.getUserEmail())!=null){
+                return  "repeated userEmail";
+            }
+        }else {
+            sysUser.setUserEmail(null);
+        }
+
+        if (!StringUtils.isEmpty(sysUser.getUserMobile())){
+            if (!sysUser.getUserMobile().equals(user.getUserMobile()) && getSysUserRepository().findByUserMobile(sysUser.getUserMobile())!=null){
+                return  "repeated userMobile";
+            }
+        }else {
+            sysUser.setUserMobile(null);
+        }
+        user.setUserName(sysUser.getUserName());
+        user.setUserSex(sysUser.getUserSex());
+        user.setIsAdmin(sysUser.getIsAdmin());
+        user.setUserMobile(sysUser.getUserMobile());
+        user.setUserEmail(sysUser.getUserEmail());
+        user.setIsDelete(sysUser.getIsDelete());
+        user.setLastModifiedBy(sysUser.getLastModifiedBy());
         getSysUserRepository().save(user);
         return "success";
     }

@@ -16,15 +16,15 @@
                   </div>
               </div>
               <div style="width: 60%">
-                  <input type="hidden" name="id" id="id" >
+                  <input type="hidden" name="id" id="userId" >
                   <div class="form-group" style="height:40px">
                       <label class="control-label col-md-5" for="loginId"><span style='color:red'>*</span>&nbsp;用户账号：</label>
                       <div class="col-md-7">
                           <input class="form-control" type="text" name="loginId"  id="loginId" required  pattern="[A-Za-z0-9]{5,10}" oninvalid="validatelt(this,'账号长度为5~10位，且不能有中文')" >
                       </div>
                   </div >
-                  <div class="form-group" style="height:40px">
-                      <label class="control-label col-md-5" for="userPsw"><span style='color:red'>*</span>&nbsp;用户昵称：</label>
+                  <div class="form-group userPswDiv" style="height:40px">
+                      <label class="control-label col-md-5" for="userPsw"><span style='color:red'>*</span>&nbsp;用户密码：</label>
                       <div class="col-md-7">
                           <input class="form-control" type="password" name="userPsw"    id="userPsw"  pattern="[A-Za-z0-9]{6,30}" name="password" oninvalid="validatelt(this,'密码长度至少为六位，且不能有中文')" >
                       </div>
@@ -37,12 +37,12 @@
                   </div>
                   <div class="form-group" style="height:40px">
                       <label class="control-label col-md-5"><span style='color:red'>*</span>&nbsp;性别：</label>
-                      <div class="col-md-7">
+                      <div class="col-md-7" id="userSex">
                           <label class="radio-inline">
-                              <input  type="radio" name="userSex"  value="0" required> 男
+                              <input  type="radio" name="userSex"  value="0"   required> 女
                           </label>
                           <label class="radio-inline">
-                              <input type="radio" name="userSex"   value="1" required> 女
+                              <input type="radio" name="userSex"   value="1" required> 男
                           </label>
                           <label class="radio-inline">
                               <input type="radio" name="userSex"  value="2"  required> 保密
@@ -52,12 +52,12 @@
                   </div>
                   <div class="form-group" style="height:40px">
                       <label class="control-label col-md-5"><span style='color:red'>*</span>&nbsp;是否管理员：</label>
-                      <div class="col-md-7">
+                      <div class="col-md-7" id="userIsAdmin">
                           <label class="radio-inline">
-                              <input  type="radio" name="isAdmin"  value="Y" required> 是
+                              <input  type="radio" name="isAdmin"  value="Y"  required> 是
                           </label>
                           <label class="radio-inline">
-                              <input type="radio" name="isAdmin"   value="N" required> 否
+                              <input type="radio" name="isAdmin"  value="N" required> 否
                           </label>
                       </div>
                   </div>
@@ -75,9 +75,9 @@
                   </div>
                   <div class="form-group" style="height:40px">
                       <label class="control-label col-md-5"><span style='color:red'>*</span>&nbsp;账号状态：</label>
-                      <div class="col-md-7">
+                      <div class="col-md-7" id="userIsDelete">
                           <label class="radio-inline">
-                              <input type="radio" name="isDelete" value="N" required> 正常
+                              <input type="radio" name="isDelete" value="N"  required> 正常
                           </label>
                           <label class="radio-inline">
                               <input type="radio"  name="isDelete" value="Y" required> 冻结

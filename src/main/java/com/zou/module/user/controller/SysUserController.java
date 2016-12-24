@@ -84,8 +84,13 @@ public class SysUserController {
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public void update(ModelMap model,Integer id){
-        sysUserService.deleteSysUser(id);
-        model.put("isAdd","Y");
+    @ResponseBody
+    public Map<String, Object> update(ModelMap model,SysUser sysUser,HttpServletRequest request){
+        SysUser adminUser = (SysUser) request.getSession().getAttribute("adminUser");
+        sysUser.setLastModifiedBy(adminUser.getLoginId());
+        String userSuccess = sysUserService.updateSysUser(sysUser);
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        modelMap.put("success",userSuccess);
+        return modelMap;
     }
 }
