@@ -8,6 +8,54 @@ $(function(){
         });
     });
 
+    $("#deleteUser").click(function(){
+        console.log("deleteUser");
+        var userArray = $('#userList').bootstrapTable('getSelections');
+        if (userArray.length<1){
+            alert("请选择一行数据");
+            return;
+        }else if(userArray.length>1){
+            alert("只能选择一行数据");
+            return;
+        }
+        var userId = userArray[0].id;
+        if (confirm("确定删除")){
+            $.ajax({
+                url:webPath.webRoot+"/admin/sysuser/delete.json",
+                type:"post",
+                dataType:"json",
+                data:{id:userId},
+                async: false,
+                success:function(data){
+                    $("#userList").bootstrapTable('refresh');
+                },
+                error: function(XMLHttpRequest, status){
+                    if (XMLHttpRequest.status == 500) {
+                        //var result = eval("(" + XMLHttpRequest.responseText + ")");
+                        alert("系统错误，操作失败！");
+                    }
+                }
+            });
+        };
+    });
+
+    $("#alertUserPswbtn").click(function(){
+        console.log("alertUserPswbtn");
+        $("#alertUserPsw").val("");
+        $("#alertUserId").val("");
+        var userArray = $('#userList').bootstrapTable('getSelections');
+        if (userArray.length<1){
+            alert("请选择一行数据");
+            return;
+        }else if(userArray.length>1){
+            alert("只能选择一行数据");
+            return;
+        }
+        var userId = userArray[0].id;
+        $("#alertUserId").val(userId);
+        $('#showAlertPsw').modal('show')
+    });
+
     $("#addUserBtn").click(function(){
         console.log("addUserBtn");
         $(".userPswDiv").show();
@@ -87,11 +135,32 @@ $(function(){
         });
         return false;
     });
+
+    $("#alertUserPswForm").submit(function(){
+        $.ajax({
+            url:webPath.webRoot+"/admin/sysuser/alertPsw.json",
+            type:"POST",
+            dataType:"json",
+            data:{id:$("#alertUserId").val(),userPsw:$.md5($("#alertUserPsw").val())},
+            success:function(data){
+                if ("Y"==data.isAlertPsw){
+                    alert("修改密码成功！");
+                    $("#userList").bootstrapTable('refresh');
+                    $('#showAlertPsw').modal('hide')
+                }
+            },
+            error: function(XMLHttpRequest, status){
+                if (XMLHttpRequest.status == 500) {
+                    //var result = eval("(" + XMLHttpRequest.responseText + ")");
+                    alert("系统出现错误，修改失败");
+                }
+            }
+        });
+        return false;
+    });
 });
 
 function buildUserEditor(sysUser){
-    //$("#validateForm .modal-body input[type!='radio']").val("");
-    //$("#validateForm .modal-body input[type='radio']").removeAttr("checked");
     $("#userId").val(sysUser.id);
     $("#loginId").val(sysUser.loginId);
     $("#userName").val(sysUser.userName);

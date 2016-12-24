@@ -78,9 +78,12 @@ public class SysUserController {
         return modelMap;
     }
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
-    public void delete(ModelMap model,Integer id){
+    @ResponseBody
+    public Map<String, Object> delete(Integer id){
         sysUserService.deleteSysUser(id);
-        model.put("isAdd","Y");
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        modelMap.put("isDelete","Y");
+        return modelMap;
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.POST)
@@ -91,6 +94,15 @@ public class SysUserController {
         String userSuccess = sysUserService.updateSysUser(sysUser);
         Map<String, Object> modelMap = new HashMap<String, Object>();
         modelMap.put("success",userSuccess);
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/alertPsw",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> alertPsw(Integer id,String userPsw){
+        sysUserService.alertPsw(id,userPsw);
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        modelMap.put("isAlertPsw","Y");
         return modelMap;
     }
 }

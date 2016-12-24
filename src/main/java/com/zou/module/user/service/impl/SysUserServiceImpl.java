@@ -52,13 +52,12 @@ public class SysUserServiceImpl extends AbstractBaseService<SysUser,Integer> imp
     @Override
     @Transactional
     public void deleteSysUser(Integer id) {
-            getSysUserRepository().delete(id);
+        getSysUserRepository().delete(id);
     }
 
     @Override
     @Transactional
     public String updateSysUser(SysUser sysUser) {
-        MD5Tools.MD5("123456");
         SysUser user = getSysUserRepository().findOne(sysUser.getId());
         if (user==null){
             throw new RuntimeException("没有这个用户，更新失败!");
@@ -98,6 +97,14 @@ public class SysUserServiceImpl extends AbstractBaseService<SysUser,Integer> imp
     @Override
     public Page<SysUser> findSysUserPage(Pageable pageable, String searchUser) {
         return getSysUserRepository().query(pageable,searchUser);
+    }
+
+    @Override
+    @Transactional
+    public void alertPsw(Integer id, String userPsw) {
+        SysUser user = getSysUserRepository().getOne(id);
+        user.setUserPsw(userPsw);
+        getSysUserRepository().save(user);
     }
 
 

@@ -15,6 +15,7 @@
 <script type="text/javascript" src="${webRoot}/commons/bootstrap-table/dist/bootstrap-table.js"></script>
 <script type="text/javascript" src="${webRoot}/commons/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
 <script type="text/javascript" src="${webRoot}/commons/plugins/iCheck/icheck.min.js"></script>
+<script  type="text/javascript" src="${webRoot}/js/jquery.md5.js"></script>
 <script type="text/javascript" src="${webRoot}/admin/sysUser/statics/js/sysUserList.js"></script>
 <script type="text/javascript">
 
@@ -42,9 +43,9 @@
             <div class="col-sm-1" style="width:auto;margin-top:16px;">
                 <button class="btn btn-block btn-success" id="addUserBtn" type="button" >添加</button>
                 <button class="btn btn-block btn-warning" id="updateUserBtn" type="button" >编辑</button>
-                <button class="btn btn-block btn-primary" type="button" >修改密码</button>
-                <button class="btn btn-block btn-info" type="button" >冻结</button>
-                <button class="btn btn-block btn-danger" type="button" >删除</button>
+                <button class="btn btn-block btn-primary" id="alertUserPswbtn" type="button" >修改密码</button>
+                <%--<button class="btn btn-block btn-info" type="button" >冻结</button>--%>
+                <button class="btn btn-block btn-danger" id="deleteUser" type="button" >删除</button>
             </div>
                 <table data-toggle="table"
                        id="userList"
@@ -84,5 +85,8 @@
     </div>
 </section>
 <div class="modal fade" role="dialog" id="showSysRoleModal">
-<jsp:include page="sysUserEditor.jsp"/>
+    <jsp:include page="sysUserEditor.jsp"/>
+</div>
+<div class="modal fade" role="dialog" id="showAlertPsw">
+    <jsp:include page="alertUserPsw.jsp"/>
 </div>
