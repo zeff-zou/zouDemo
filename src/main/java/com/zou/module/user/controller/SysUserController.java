@@ -67,9 +67,15 @@ public class SysUserController {
     }
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public void addUser(ModelMap model, SysUser sysUser){
+    @ResponseBody
+    public Map<String, Object> addUser(ModelMap model, SysUser sysUser,HttpServletRequest request){
+        SysUser adminUser = (SysUser) request.getSession().getAttribute("adminUser");
+        sysUser.setCreateBy(adminUser.getLoginId());
+        sysUser.setLastModifiedBy(adminUser.getLoginId());
         sysUserService.addSysUser(sysUser);
-        model.put("isAdd","Y");
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        modelMap.put("success","Y");
+        return modelMap;
     }
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public void delete(ModelMap model,Integer id){

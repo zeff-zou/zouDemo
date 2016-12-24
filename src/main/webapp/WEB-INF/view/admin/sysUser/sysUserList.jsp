@@ -16,26 +16,22 @@
 <script type="text/javascript" src="${webRoot}/commons/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
 <script type="text/javascript" src="${webRoot}/commons/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript" src="${webRoot}/admin/sysUser/statics/js/sysUserList.js"></script>
+<script type="text/javascript">
+
+
+</script>
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
         用户管理列表
         <%--<small>Control panel</small>--%>
     </h1>
-    <%--<ol class="breadcrumb">--%>
-        <%--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>--%>
-        <%--<li class="active">Dashboard</li>--%>
-    <%--</ol>--%>
 </section>
 
 <!-- Main content -->
 <section class="content">
 
     <div class="box">
-        <%--<div class="box-header">--%>
-            <%--<h3 class="box-title">用户管理列表</h3>--%>
-        <%--</div>--%>
-        <!-- /.box-header -->
         <div class="box-body">
             <div class="col-sm-1" style="width:100%;margin-top:16px;">
                     <label style="width: 200px;float: left;margin-right:15px">
@@ -49,7 +45,6 @@
                 <button class="btn btn-block btn-primary" type="button" >修改密码</button>
                 <button class="btn btn-block btn-info" type="button" >冻结</button>
                 <button class="btn btn-block btn-danger" type="button" >删除</button>
-
             </div>
                 <table data-toggle="table"
                        id="userList"

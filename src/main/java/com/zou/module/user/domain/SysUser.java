@@ -29,7 +29,7 @@ public class SysUser extends BaseEntity<Integer>{
     @Column(name = "USER_NAME", unique = false, nullable = false, insertable = true, updatable = true, length = 20)
     private java.lang.String userName;
 
-    @Column(name = "USER_AGE", unique = false, nullable = false, insertable = true, updatable = true, length = 10)
+    @Column(name = "USER_AGE", unique = false, nullable = true, insertable = true, updatable = true, length = 10)
     private java.lang.Integer userAge;
 
     @Column(name = "USER_SEX", unique = false, nullable = false, insertable = true, updatable = true, length = 2)
@@ -45,12 +45,12 @@ public class SysUser extends BaseEntity<Integer>{
     /**
      * userMobile       db_column: USER_MOBILE
      */
-    @Column(name = "USER_MOBILE", unique = true, nullable = false, insertable = true, updatable = true, length = 64)
+    @Column(name = "USER_MOBILE", unique = true, nullable = true, insertable = true, updatable = true, length = 64)
     private java.lang.String userMobile;
     /**
      * userEmail       db_column: USER_EMAIL
      */
-    @Column(name = "USER_EMAIL", unique = true, nullable = false, insertable = true, updatable = true, length = 128)
+    @Column(name = "USER_EMAIL", unique = true, nullable = true, insertable = true, updatable = true, length = 128)
     private java.lang.String userEmail;
     /**
      * isDelete       db_column: IS_DELETE

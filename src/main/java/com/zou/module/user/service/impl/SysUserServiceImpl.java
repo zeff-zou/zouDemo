@@ -32,7 +32,7 @@ public class SysUserServiceImpl extends AbstractBaseService<SysUser,Integer> imp
     @Override
     @Transactional
     public void addSysUser(SysUser sysUser) {
-            getSysUserRepository().save(sysUser);
+        getSysUserRepository().save(sysUser);
     }
 
     @Override
