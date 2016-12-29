@@ -14,13 +14,38 @@
 <%--<script type="text/javascript" src="${webRoot}/commons/bootstrap/js/bootstrap.min.js"></script>--%>
 <script type="text/javascript" src="${webRoot}/commons/bootstrap-table/dist/bootstrap-table.js"></script>
 <script type="text/javascript" src="${webRoot}/commons/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
-<script type="text/javascript" src="${webRoot}/commons/plugins/iCheck/icheck.min.js"></script>
+<%--<script type="text/javascript" src="${webRoot}/commons/plugins/iCheck/icheck.min.js"></script>--%>
 <script  type="text/javascript" src="${webRoot}/js/jquery.md5.js"></script>
 <script type="text/javascript" src="${webRoot}/admin/sysUser/statics/js/sysUserList.js"></script>
 <script type="text/javascript">
 
 
 </script>
+<div id="myAlert" class="alert " style="display: none;">
+    <a href="#" class="close" >&times;</a>
+    <strong>警告！您的网络连接有问题。</strong>
+</div>
+<%--<div class="alert alert-info alert-dismissablealert-warning">--%>
+    <%--<button type="button" class="close" data-dismiss="alert"--%>
+            <%--aria-hidden="true">--%>
+        <%--&times;--%>
+    <%--</button>--%>
+    <%--信息！请注意这个信息。--%>
+<%--</div>--%>
+<%--<div class="alert alert-warning alert-dismissable">--%>
+    <%--<button type="button" class="close" data-dismiss="alert"--%>
+            <%--aria-hidden="true">--%>
+        <%--&times;--%>
+    <%--</button>--%>
+    <%--警告！请不要提交。--%>
+<%--</div>--%>
+<%--<div class="alert alert-danger alert-dismissable">--%>
+    <%--<button type="button" class="close" data-dismiss="alert"--%>
+            <%--aria-hidden="true">--%>
+        <%--&times;--%>
+    <%--</button>--%>
+    <%--错误！请进行一些更改。--%>
+<%--</div>--%>
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>

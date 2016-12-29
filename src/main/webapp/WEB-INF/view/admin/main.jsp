@@ -75,6 +75,7 @@
 <script type="text/javascript" src="${webRoot}/commons/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- js路由 -->
 <script type="text/javascript" src="${webRoot}/commons/route.js"></script>
+<script type="text/javascript" src="${webRoot}/commons/main.js"></script>
 <%--<script type="text/javascript">--%>
     <%--$.widget.bridge('uibutton', $.ui.button);--%>
 <%--</script>--%>
@@ -107,5 +108,7 @@
 <%--<script type="text/javascript" src="${webRoot}/commons/dist/js/pages/dashboard.js"></script>--%>
 <!-- AdminLTE for demo purposes -->
 <%--<script type="text/javascript" src="${webRoot}/commons/dist/js/demo.js"></script>--%>
+<%--bootstrap 提示框html--%>
+<jsp:include page="includes/main-alert.jsp"/>
 </body>
 </html>

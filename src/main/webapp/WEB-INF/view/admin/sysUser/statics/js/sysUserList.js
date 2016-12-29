@@ -19,24 +19,32 @@ $(function(){
             return;
         }
         var userId = userArray[0].id;
-        if (confirm("确定删除")){
-            $.ajax({
-                url:webPath.webRoot+"/admin/sysuser/delete.json",
-                type:"post",
-                dataType:"json",
-                data:{id:userId},
-                async: false,
-                success:function(data){
-                    $("#userList").bootstrapTable('refresh');
-                },
-                error: function(XMLHttpRequest, status){
-                    if (XMLHttpRequest.status == 500) {
-                        //var result = eval("(" + XMLHttpRequest.responseText + ")");
-                        alert("系统错误，操作失败！");
-                    }
+        Common.confirm({
+            title: "确认删除？",
+            message: "确认是否删除此条用户数据",
+            operate: function (reselt) {
+                if (reselt) {
+                        $.ajax({
+                            url:webPath.webRoot+"/admin/sysuser/delete.json",
+                            type:"post",
+                            dataType:"json",
+                            data:{id:userId},
+                            async: false,
+                            success:function(data){
+                                $("#userList").bootstrapTable('refresh');
+                            },
+                            error: function(XMLHttpRequest, status){
+                                if (XMLHttpRequest.status == 500) {
+                                    //var result = eval("(" + XMLHttpRequest.responseText + ")");
+                                    alert("系统错误，操作失败！");
+                                }
+                            }
+                        });
+                } else {
+
                 }
-            });
-        };
+            }
+        })
     });
 
     $("#alertUserPswbtn").click(function(){
@@ -115,7 +123,8 @@ $(function(){
             data:$('#validateForm').serialize(),
             success:function(data){
                 if ("success"==data.success){
-                    alert(userdetil+"成功");
+                    //alert(userdetil+"成功");
+                    showAlertBootstaty("alert-success",userdetil+"成功");
                     $("#userList").bootstrapTable('refresh');
                     $('#showSysRoleModal').modal('hide')
                 }else if ("repeated loginId"==data.success){
@@ -135,7 +144,18 @@ $(function(){
         });
         return false;
     });
+    $("#myAlert .close").click(function(){
+        $("#myAlert").slideToggle(500);
+    });
 });
+
+function showAlertBootstaty(alertclas,alerttext){
+    $("#myAlert").attr("class","");
+    $("#myAlert").attr("class","alert "+alertclas);
+    $("#myAlert strong").text(alerttext);
+    $("#myAlert").slideToggle(500);
+
+}
 
 function buildUserEditor(sysUser){
     $("#userId").val(sysUser.id);
