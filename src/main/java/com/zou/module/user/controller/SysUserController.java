@@ -1,9 +1,9 @@
 package com.zou.module.user.controller;
 
+import com.zou.commons.web.WebContextFactory;
 import com.zou.module.user.domain.SysUser;
 import com.zou.module.user.service.ISysUserService;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -32,7 +32,8 @@ public class SysUserController {
         SysUser sysUser = sysUserService.loginSysUser(loginId, password);
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (sysUser!=null){
-           request.getSession().setAttribute("adminUser",sysUser);
+//           request.getSession().setAttribute("adminUser",sysUser);
+            WebContextFactory.getWebContext().setSessionAttr("adminUser",sysUser);
             modelMap.put("success","Y");
         }else {
             modelMap.put("success","N");
@@ -52,6 +53,7 @@ public class SysUserController {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         modelMap.put("rows",userPage.getContent());
         modelMap.put("total",userPage.getTotalElements());
+        WebContextFactory.getWebContext().getSessionAttr("adminUser");
         return modelMap;
     }
     @RequestMapping(value = "/sysUserList",method = RequestMethod.GET)

@@ -20,4 +20,5 @@ http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.
         <property name="location" value="classpath:config.properties" />
     </bean>
     -->
+    <bean id="webContextFactory" class="com.zou.commons.web.WebContextFactory"></bean>
 </beans>
