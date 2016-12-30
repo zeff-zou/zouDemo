@@ -22,7 +22,7 @@
 
 </script>
 <div id="myAlert" class="alert " style="display: none;">
-    <a href="#" class="close" >&times;</a>
+    <a href="javascript:;" class="close" >&times;</a>
     <strong>警告！您的网络连接有问题。</strong>
 </div>
 <%--<div class="alert alert-info alert-dismissablealert-warning">--%>

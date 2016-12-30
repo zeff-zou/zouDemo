@@ -22,3 +22,17 @@ var Common = {
         })
     }
 }
+
+var myAlert={
+    showAndHide:function(objId,alertclas,alerttext){
+        var thisObj = $("#"+objId);
+        $(thisObj).attr("class","");
+        $(thisObj).attr("class","alert "+alertclas);
+        $(thisObj).find("strong").text(alerttext);
+        $(thisObj).slideDown(500);
+        setTimeout("$('#myAlert').slideUp(500);",3000);
+    },
+    hide:function(objId){
+        $("#"+objId).slideUp(500);
+    }
+}

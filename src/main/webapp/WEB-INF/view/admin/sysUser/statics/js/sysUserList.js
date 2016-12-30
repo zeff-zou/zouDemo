@@ -123,8 +123,7 @@ $(function(){
             data:$('#validateForm').serialize(),
             success:function(data){
                 if ("success"==data.success){
-                    //alert(userdetil+"成功");
-                    showAlertBootstaty("alert-success",userdetil+"成功");
+                    myAlert.showAndHide("myAlert","alert-success",userdetil+"成功")
                     $("#userList").bootstrapTable('refresh');
                     $('#showSysRoleModal').modal('hide')
                 }else if ("repeated loginId"==data.success){
@@ -145,17 +144,9 @@ $(function(){
         return false;
     });
     $("#myAlert .close").click(function(){
-        $("#myAlert").slideToggle(500);
+        myAlert.hide("myAlert");
     });
 });
-
-function showAlertBootstaty(alertclas,alerttext){
-    $("#myAlert").attr("class","");
-    $("#myAlert").attr("class","alert "+alertclas);
-    $("#myAlert strong").text(alerttext);
-    $("#myAlert").slideToggle(500);
-
-}
 
 function buildUserEditor(sysUser){
     $("#userId").val(sysUser.id);
